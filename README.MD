@@ -56,4 +56,4 @@ portfolio/
 ##  Nota
 Este repositorio actúa como base del portfolio, mientras que la versión principal está desplegada en dominio propio.
 
-<img src="./portfolio.png" width="180" />
+<img src="./portfolio.png" width="700" />
