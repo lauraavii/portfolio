@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Laura Arenas — Portfolio ASIR</title>
+<link rel="icon" type="image/webp" href="pingu.webp?v=2" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F1F5F9;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --text: #0F172A;
+    --muted: #475569;
+    --soft: #94A3B8;
+    --accent: #4F46E5;
+    --accent-dark: #3730A3;
+    --green: #1F8A4C;
+    --green-bg: #E8F6EC;
+    --green-bd: #BFE6CB;
+    --blue: #2563EB;
+    --blue-bg: #EAF1FB;
+    --blue-bd: #CDDFF7;
+    --orange-bg: #FFF7ED;
+    --orange-bd: #F8D2B8;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+  }
+
+  .page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 56px 64px 80px;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 72px;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar { 
+    position: sticky; 
+    top: 40px; 
+    align-self: start;
+    background: var(--card);
+    padding: 40px 30px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  }
+
+  .avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 28px;
+    box-shadow: 0 8px 24px rgba(200, 74, 28, 0.18);
+  }
+
+  .name {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+
+  .tagline {
+    color: var(--accent);
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+
+  .tagline .cursor {
+    display: inline-block;
+    width: 2px;
+    background: var(--accent);
+    height: 1em;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+  .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .meta svg { width: 14px; height: 14px; }
+
+  .block {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 22px;
+    line-height: 1.7;
+  }
+  .block strong { font-weight: 600; }
+
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 15px 56px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 6px;
+    transition: background 0.2s, transform 0.1s;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .cta:hover { background: var(--accent-dark); }
+  .cta:active { transform: translateY(1px); }
+
+  .cta.outline {
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--text);
+    margin-top: 12px;
+    padding: 12px 56px;
+  }
+  .cta.outline:hover {
+    background: var(--border);
+  }
+
+  .lang-switcher {
+    position: absolute;
+    top: 20px;
+    right: 64px;
+    display: flex;
+    gap: 8px;
+    z-index: 50;
+  }
+  .lang-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .build-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin-top: 16px;
+    text-decoration: none;
+  }
+  .build-badge .dot {
+    width: 18px; height: 18px; border-radius: 5px;
+    background: var(--accent);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 11px;
+  }
+
+  /* ---------- Main ---------- */
+  .main h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    border-top: 4px solid var(--accent);
+    flex-direction: column;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .title-row { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
+
+  .icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .card-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    line-height: 1.2;
+  }
+  .card-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-name a:hover { color: var(--accent); }
+  .card-role {
+    color: var(--soft);
+    font-size: 13px;
+  }
+
+  .badge {
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .b-active    { background: var(--green-bg);  color: var(--green); border-color: var(--green-bd); }
+  .b-completed { background: var(--blue-bg);   color: var(--blue);  border-color: var(--blue-bd); }
+  .b-project   { background: var(--orange-bg); color: var(--accent-dark); border-color: var(--orange-bd); }
+
+  .card-desc {
+    font-size: 13.5px;
+    color: #3a3a3a;
+    line-height: 1.55;
+    margin-bottom: 14px;
+    flex-grow: 1;
+  }
+
+  .card-foot {
+    color: #999;
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stack {
+    color: var(--accent);
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .stat-num.orange { color: var(--accent); }
+  .stat-num.green  { color: var(--green); }
+  .stat-num.blue   { color: var(--blue); }
+
+  .stat-label {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ---------- Card click affordance ---------- */
+  .card { cursor: pointer; position: relative; }
+  .card::after {
+    content: "↗";
+    position: absolute;
+    top: 22px; right: 22px;
+    color: #C8C0AE;
+    font-size: 14px;
+    transition: color 0.18s, transform 0.18s;
+    pointer-events: none;
+  }
+  .card:hover::after { color: var(--accent); transform: translate(2px, -2px); }
+
+  /* ---------- Modal ---------- */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5vh 24px 24px;
+    overflow-y: auto;
+  }
+  .modal.open { display: flex; }
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 16, 10, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: fadeIn 0.22s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal-content {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    width: 100%;
+    max-width: 880px;
+    padding: 36px 40px 40px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+    animation: rise 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+  @keyframes rise {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, transform 0.15s;
+    font-family: inherit;
+    line-height: 1;
+  }
+  .modal-close:hover { background: var(--accent); color: #fff; transform: rotate(90deg); }
+
+  .modal-head {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    padding-right: 60px;
+  }
+  .modal-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    letter-spacing: -0.5px;
+  }
+  .modal-role {
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+
+  .modal-tagline {
+    font-size: 16px;
+    color: #2a2a2a;
+    line-height: 1.65;
+    padding: 14px 18px;
+    background: #fff;
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    margin-bottom: 28px;
+  }
+
+  .modal-section { margin-bottom: 26px; }
+  .modal-section h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--soft);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .highlights {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+  .highlights li {
+    font-size: 14px;
+    color: #2a2a2a;
+    padding-left: 24px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .highlights li::before {
+    content: "▸";
+    position: absolute;
+    left: 4px; top: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .modal-why {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.7;
+    background: var(--blue-bg);
+    padding: 16px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--blue-bd);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    background: #fff;
+    border: 1px solid var(--border);
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor: zoom-in;
+    transition: transform 0.18s;
+    display: block;
+  }
+  .gallery img:hover { transform: scale(1.02); }
+  .gallery.single { grid-template-columns: 1fr; }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    cursor: zoom-out;
+    animation: fadeIn 0.18s ease;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95vw;
+    max-height: 92vh;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  }
+
+  .modal-footer {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .modal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: #1a1a1a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .modal-link:hover { background: var(--accent); }
+  .modal-link.outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .modal-link.outline:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1000px) {
+    .page {
+      grid-template-columns: 1fr;
+      padding: 36px 28px 60px;
+      gap: 40px;
+    }
+    .sidebar { position: static; }
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+    .modal-content { padding: 28px 22px 32px; }
+    .gallery { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Print Styles ---------- */
+  @media print {
+    .lang-switcher, .cta, .build-badge, .modal, .lightbox, .card::after {
+      display: none !important;
+    }
+    body {
+      background: white;
+      font-size: 12pt;
+    }
+    .page {
+      display: block;
+      padding: 0;
+    }
+    .sidebar {
+      background: none;
+      border: none;
+      box-shadow: none;
+      position: static;
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+    .avatar { width: 120px; height: 120px; }
+    .card {
+      break-inside: avoid;
+      border: 1px solid #eee !important;
+      box-shadow: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+  </div>
+
+  <div class="page">
+    <!-- =============== SIDEBAR =============== -->
+    <aside class="sidebar">
+      <img class="avatar" src="my-pic.jpeg?v=2" alt="Laura Arenas Vicente" />
+
+      <h1 class="name">Laura Arenas Vicente</h1>
+      <p class="tagline"><span data-i18n="tagline">Técnica en Administración de Sistemas</span><span class="cursor"></span></p>
+
+      <div class="meta">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Oviedo, Asturias, España
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          <span data-i18n="specialization">Sistemas y Redes</span>
+        </span>
+      </div>
+
+      
+
+      <p class="block" data-i18n="bio1">
+        Técnico ASIR enfocado en administración de sistemas Linux/Windows, redes y despliegue de aplicaciones web.
+      </p>
+
+      <p class="block" data-i18n="bio2">
+        Desarrollo soluciones reales combinando backend con Laravel/PHP e infraestructuras funcionales.
+      </p>
+
+      <a href="mailto:lauraruenes@gmail.com" class="cta" data-i18n="cta">Hablemos</a>
+      <a href="CV_Laura_ArenasVicente.pdf" download="CV_Laura_Arenas.pdf" class="cta outline" data-i18n="download-cv">Descargar CV</a>
+
+      <a class="build-badge" href="https://github.com/lauraavii" target="_blank" rel="noopener" aria-label="GitHub Profile">
+        <span class="dot">G</span> github.com/lauraavii
+      </a>
+    </aside>
+
+    <!-- =============== MAIN =============== -->
+    <main class="main">
+      <h1 data-i18n="mainTitle">Proyectos y Experiencia</h1>
+
+      <section class="grid">
+
+        <!-- incentivos-qr -->
+        <article class="card" data-project="incentivos-qr">
+          <header class="card-head">
+            <div class="title-row">
+              <div class="icon" style="background:#E66F35;">Q</div>
+              <div>
+                <div class="card-name" data-i18n="p1-name">Sistema de Gestión de Inventario IT con QR</div>
+                <div class="card-role" data-i18n="p1-role">Sistema· Laravel / Infraestructura </div>
+              </div>
+            </div>
+            <span class="badge b-project" data-i18n="badge-project">Project</span>
+          </header>
+          <p class="card-desc" data-i18n="p1-desc">
+            Sistema web para la gestión de inventario de equipos informáticos con generación automática de códigos QR, seguimiento de incidencias y mantenimiento preventivo.
+          </p>
+          <div class="card-foot">
+            <span>Laravel · PHP · Filament · MySQL · Ubuntu Server · Apache · JavaScript · CSS</span>
+          </div>
+        </article>
+
+        <!-- hotel-cares -->
+        <article class="card" data-project="hotel-cares">
+          <header class="card-head">
+            <div class="title-row">
+              <div class="icon" style="background:#0EA5E9;">H</div>
+              <div>
+                <div class="card-name" data-i18n="p2-name">Web Turística para Hotel + Ruta del Cares</div>
+                <div class="card-role" data-i18n="p2-role">Web · Cliente Real</div>
+              </div>
+            </div>
+            <span class="badge b-project" data-i18n="badge-project">Project</span>
+          </header>
+          <p class="card-desc" data-i18n="p2-desc">
+            Desarrollo de una web a medida para un cliente del sector turístico, orientada a presentar información del hotel y la Ruta del Cares.
+          </p>
+          <div class="card-foot">
+            <span>HTML · CSS · JavaScript · Laravel</span>
+          </div>
+        </article>
+
+        <!-- Juego de Banderas -->
+        <article class="card" data-project="juego-banderas">
+          <header class="card-head">
+            <div class="title-row">
+              <div class="icon" style="background:#DB2777;">B</div>
+              <div>
+                <div class="card-name" data-i18n="p3-name">Juego de Banderas</div>
+                <div class="card-role" data-i18n="p3-role">Frontend · JavaScript</div>
+              </div>
+            </div>
+            <span class="badge b-project" data-i18n="badge-project">Project</span>
+          </header>
+          <p class="card-desc" data-i18n="p3-desc">
+            Juego interactivo para identificar países mediante banderas y mapas, con diferentes modos de juego y sistema de puntuación.
+          </p>
+          <div class="card-foot">
+            <span>JavaScript · HTML · CSS · JSON</span>
+          </div>
+        </article>
+
+        <!-- practicas-it -->
+        <article class="card" data-project="practicas-it">
+          <header class="card-head">
+            <div class="title-row">
+              <div class="icon" style="background:#1F8A4C;">S</div>
+              <div>
+                <div class="card-name" data-i18n="p4-name">Prácticas en Indra</div>
+                <div class="card-role" data-i18n="p4-role">Sistemas · Linux / Docker</div>
+              </div>
+            </div>
+            <span class="badge b-active" data-i18n="badge-exp">Experiencia</span>
+          </header>
+          <p class="card-desc" data-i18n="p4-desc">
+            Prácticas en administración de sistemas en entorno corporativo, trabajando con servidores Linux y tareas de soporte técnico.
+          </p>
+          <div class="card-foot">
+            <span>Linux · Docker · Soporte IT</span>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="stats">
+        <div class="stat">
+          <div class="stat-num orange">4</div>
+          <div class="stat-label" data-i18n="stat-projects">Proyectos Desarrollados</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num green">2</div>
+          <div class="stat-label" data-i18n="stat-servers">Servidores Administrados</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num blue">9</div>
+          <div class="stat-label" data-i18n="stat-tech">Tecnologías IT</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- =============== MODAL =============== -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-overlay" data-close></div>
+    <div class="modal-content">
+      <button class="modal-close" data-close aria-label="Close">×</button>
+      <header class="modal-head">
+        <div class="modal-icon" id="m-icon"></div>
+        <div>
+          <h2 class="modal-title" id="m-title"></h2>
+          <p class="modal-role" id="m-role"></p>
+        </div>
+      </header>
+      <p class="modal-tagline" id="m-tagline"></p>
+
+      <section class="modal-section">
+        <h3 data-i18n="modal-highlights">Highlights</h3>
+        <ul class="highlights" id="m-highlights"></ul>
+      </section>
+
+      <section class="modal-section" id="m-why-section">
+        <h3 data-i18n="modal-why">Why this matters</h3>
+        <p class="modal-why" id="m-why"></p>
+      </section>
+
+      <section class="modal-section">
+        <h3 data-i18n="modal-stack">Tech Stack</h3>
+        <div class="chips" id="m-stack"></div>
+      </section>
+
+      <section class="modal-section" id="m-gallery-section">
+        <h3 data-i18n="modal-demo">Demo</h3>
+        <div class="gallery" id="m-gallery"></div>
+      </section>
+
+      <footer class="modal-footer" id="m-footer"></footer>
+    </div>
+  </div>
+
+  <!-- =============== LIGHTBOX =============== -->
+  <div class="lightbox" id="lightbox" data-close>
+    <img id="lightbox-img" alt="" />
+  </div>
+
+<script>
+let currentLang = 'es';
+
+const uiStrings = {
+  es: {
+    tagline: 'Técnica en Administración de Sistemas',
+    specialization: 'Sistemas y Redes',
+    bio1: 'Técnico ASIR enfocado en administración de sistemas Linux/Windows, redes y despliegue de aplicaciones web.',
+    bio2: 'Desarrollo soluciones reales combinando backend con Laravel/PHP e infraestructuras funcionales.',
+    cta: 'Hablemos',
+    'download-cv': 'Descargar CV',
+    mainTitle: 'Proyectos y Experiencia',
+    'badge-project': 'Proyecto',
+    'badge-exp': 'Experiencia',
+    'stat-projects': 'Proyectos Clave',
+    'stat-servers': 'Servidores Administrados',
+    'stat-tech': 'Tecnologías',
+    'modal-highlights': 'Puntos clave',
+    'modal-why': 'Por qué es importante',
+    'modal-stack': 'Tecnologías',
+    'modal-demo': 'Demo',
+    'view-project': 'Visitar web',
+    'view-github': 'Ver en GitHub',
+    'close': 'Cerrar'
+  },
+  en: {
+    tagline: 'Systems Administration Technician',
+    specialization: 'Systems and Networks',
+    bio1: 'ASIR Technician focused on Linux/Windows systems administration, networking and web app deployment.',
+    bio2: 'Developing real-world solutions combining Laravel/PHP backend with functional infrastructures.',
+    cta: "Let's talk",
+    'download-cv': 'Download CV',
+    mainTitle: 'Projects & Experience',
+    'badge-project': 'Project',
+    'badge-exp': 'Experience',
+    'stat-projects': 'Key Projects',
+    'stat-servers': 'Managed Servers',
+    'stat-tech': 'Technologies',
+    'modal-highlights': 'Highlights',
+    'modal-why': 'Why this matters',
+    'modal-stack': 'Tech Stack',
+    'modal-demo': 'Demo',
+    'view-project': 'Visit Website',
+    'view-github': 'View on GitHub',
+    'close': 'Close'
+  }
+};
+
+const projects = {
+  'incentivos-qr': {
+    icon: 'S',
+    iconBg: '#E66F35',
+    stack: ['PHP', 'Laravel', 'MySQL', 'Filament', 'Ubuntu Server', 'Apache', 'CSS', 'JavaScript'],
+    images: [
+      'assets/fotos-inventario/foto1.png',
+      'assets/fotos-inventario/foto2.png',
+      'assets/fotos-inventario/foto3.png',
+      'assets/fotos-inventario/foto4.png',
+      'assets/fotos-inventario/foto5.png',
+      'assets/fotos-inventario/foto6.png'
+    ],
+    es: {
+      name: 'Sistema de Gestión de Inventario IT con QR',
+      role: 'Sistemas · Laravel / Infraestructura',
+      tagline: 'Sistema web para la gestión de inventario de equipos informáticos con generación automática de códigos QR, seguimiento de incidencias y mantenimiento preventivo.',
+      highlights: [
+        'Registro y gestión completa de equipos informáticos',
+        'Generación automática de códigos QR únicos por activo',
+        'Sistema de mantenimiento preventivo con alertas automáticas',
+        'Panel de administración desarrollado con Filament'
+      ],
+      why: 'Este proyecto simula un entorno real de gestión IT, integrando backend, base de datos y despliegue en servidor.'
+    },
+    en: {
+      name: 'IT Inventory Management System with QR',
+      role: 'Systems · Laravel / Infrastructure',
+      tagline: 'Web system for IT equipment inventory management with automatic QR code generation, issue tracking, and preventive maintenance.',
+      highlights: [
+        'Full registration and management of IT equipment',
+        'Automatic unique QR code generation per asset',
+        'Preventive maintenance system with automatic alerts',
+        'Admin panel developed with Filament'
+      ],
+      why: 'This project simulates a real IT management environment, integrating backend, database, and server deployment.'
+    }
+  },
+  'hotel-cares': {
+    icon: 'H',
+    iconBg: '#0EA5E9',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Laravel'],
+    images: [
+      'assets/web-rutacares/foto1.png',
+      'assets/web-rutacares/foto2.png',
+      'assets/web-rutacares/foto3.png',
+      'assets/web-rutacares/foto4.png',
+      'assets/web-rutacares/foto5.png',
+      'assets/web-rutacares/foto6.png'
+    ],
+    es: {
+      name: 'Web Turística para Hotel + Ruta del Cares',
+      role: 'Desarrollo Web · Cliente Real',
+      tagline: 'Desarrollo de una web a medida para un cliente del sector turístico, orientada a presentar información del hotel y la Ruta del Cares.',
+      highlights: ['Diseño responsive optimizado', 'Integración de API de clima', 'Estructuración de contenido turístico'],
+      why: 'Experiencia real trabajando con un cliente, traduciendo requisitos de negocio en una solución web funcional.'
+    },
+    en: {
+      name: 'Tourism Web for Hotel + Cares Route',
+      role: 'Web Development · Real Client',
+      tagline: 'Custom web development for a tourism sector client, focused on presenting hotel information and the Cares Route.',
+      highlights: ['Optimized responsive design', 'Weather API integration', 'Tourism content structuring'],
+      why: 'Real-world experience working with a client, translating business requirements into a functional web solution.'
+    }
+  },
+  'juego-banderas': {
+    icon: 'B',
+    iconBg: '#DB2777',
+    url: 'https://retobanderas.es',
+    stack: ['JavaScript', 'HTML', 'CSS', 'JSON'],
+    images: [
+      'assets/fotos-retobanderas/foto1.png',
+      'assets/fotos-retobanderas/foto2.png',
+      'assets/fotos-retobanderas/foto3.png',
+      'assets/fotos-retobanderas/foto4.png',
+      'assets/fotos-retobanderas/foto5.png'
+    ],
+    es: {
+      name: 'Juego de Banderas',
+      role: 'Frontend · JavaScript',
+      tagline: 'Juego interactivo para identificar países mediante banderas y mapas, disponible en retobanderas.es. Cuenta con diferentes modos de juego.',
+      highlights: ['Lógica desarrollada en JS', 'Múltiples modos de juego', 'Uso de datos en JSON'],
+      why: 'Refuerza habilidades en JavaScript y desarrollo frontend interactivo.'
+    },
+    en: {
+      name: 'Flag Quiz Game',
+      role: 'Frontend · JavaScript',
+      tagline: 'Interactive country identification game using flags and maps, available at retobanderas.es. Features multiple game modes.',
+      highlights: ['Logic developed in JS', 'Multiple game modes', 'JSON data usage'],
+      why: 'Strengthens skills in JavaScript and interactive frontend development.'
+    }
+  },
+  'practicas-it': {
+    icon: 'S',
+    iconBg: '#1F8A4C',
+    stack: ['Linux', 'Docker', 'Soporte IT'],
+    images: [],
+    es: {
+      name: 'Prácticas en Indra',
+      role: 'Sistemas · Linux / Docker',
+      tagline: 'Prácticas de administración de sistemas en entorno corporativo, trabajando con servidores Linux y tareas de soporte técnico.',
+      highlights: ['Administración de sistemas Linux', 'Soporte técnico', 'Uso de Docker'],
+      why: 'Primera experiencia en entorno profesional IT, aplicando conocimientos en situaciones reales.'
+    },
+    en: {
+      name: 'Internship at Indra',
+      role: 'Systems · Linux / Docker',
+      tagline: 'Systems administration internship in a corporate environment, working with Linux servers and technical support tasks.',
+      highlights: ['Linux systems administration', 'Technical support', 'Docker usage'],
+      why: 'First experience in a professional IT environment, applying knowledge in real situations.'
+    }
+  }
+};
+
+const $ = (sel) => document.querySelector(sel);
+const modal = $('#modal');
+const lightbox = $('#lightbox');
+const lbImg = $('#lightbox-img');
+
+function setLanguage(lang) {
+  currentLang = lang;
+  
+  // Actualizar botones
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+
+  // Actualizar textos fijos
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (uiStrings[lang][key]) {
+      el.textContent = uiStrings[lang][key];
+    }
+  });
+
+  // Actualizar tarjetas de proyectos
+  Object.keys(projects).forEach(id => {
+    const p = projects[id][lang];
+    const card = $(`.card[data-project="${id}"]`);
+    if (card) {
+      card.querySelector('.card-name').textContent = p.name;
+      card.querySelector('.card-role').textContent = p.role;
+      card.querySelector('.card-desc').textContent = p.tagline;
+    }
+  });
+}
+
+function openModal(id) {
+  const projectData = projects[id];
+  const p = projectData[currentLang];
+  if (!projectData || !p) return;
+
+  $('#m-icon').textContent = projectData.icon;
+  $('#m-icon').style.background = projectData.iconBg;
+  $('#m-title').textContent = p.name;
+  $('#m-role').textContent = p.role;
+  $('#m-tagline').textContent = p.tagline;
+
+  const hl = $('#m-highlights');
+  hl.innerHTML = '';
+  p.highlights.forEach(h => {
+    const li = document.createElement('li');
+    li.textContent = h;
+    hl.appendChild(li);
+  });
+
+  if (p.why) {
+    $('#m-why-section').style.display = '';
+    $('#m-why').textContent = p.why;
+  } else {
+    $('#m-why-section').style.display = 'none';
+  }
+
+  const stack = $('#m-stack');
+  stack.innerHTML = '';
+  projectData.stack.forEach(s => {
+    const c = document.createElement('span');
+    c.className = 'chip';
+    c.textContent = s;
+    stack.appendChild(c);
+  });
+
+  const gallery = $('#m-gallery');
+  const gallerySection = $('#m-gallery-section');
+  gallery.innerHTML = '';
+  if (projectData.images && projectData.images.length > 0) {
+    gallerySection.style.display = '';
+    gallery.classList.toggle('single', projectData.images.length === 1);
+    projectData.images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = encodeURI(src);
+      img.alt = p.name + ' demo';
+      img.loading = 'lazy';
+      img.addEventListener('click', () => openLightbox(img.src));
+      gallery.appendChild(img);
+    });
+  } else {
+    gallerySection.style.display = 'none';
+  }
+
+  const footer = $('#m-footer');
+  footer.innerHTML = '';
+  if (projectData.url) {
+    const a = document.createElement('a');
+    a.href = projectData.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'modal-link';
+    a.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> ${uiStrings[currentLang]['view-project']}`;
+    footer.appendChild(a);
+  }
+  if (projectData.github) {
+    const a = document.createElement('a');
+    a.href = projectData.github;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'modal-link';
+    a.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.3c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg> ${uiStrings[currentLang]['view-github']}`;
+    footer.appendChild(a);
+  }
+  const close = document.createElement('button');
+  close.className = 'modal-link outline';
+  close.textContent = uiStrings[currentLang]['close'];
+  close.setAttribute('data-close', '');
+  footer.appendChild(close);
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function openLightbox(src) {
+  lbImg.src = src;
+  lightbox.classList.add('open');
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lbImg.src = '';
+}
+
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    const id = card.dataset.project;
+    if (id) openModal(id);
+  });
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target.closest('[data-close]')) closeModal();
+});
+
+lightbox.addEventListener('click', (e) => {
+  e.stopPropagation();
+  closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  if (lightbox.classList.contains('open')) closeLightbox();
+  else if (modal.classList.contains('open')) closeModal();
+});
+</script>
+</body>
+</html>
