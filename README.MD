@@ -10,6 +10,8 @@ https://lauraarenasvicente.eu
 Este portfolio recopila proyectos desarrollados durante mi formación en ASIR y prácticas personales.
 
 ##  Estructura del proyecto
+
+```
 portfolio/
 ├── assets/
 │   ├── fotos-inventario/
@@ -40,6 +42,7 @@ portfolio/
 ├── my-pic.jpeg
 ├── pingu.webp
 └── README.md
+```
 
 ##  Tecnologías
 - HTML
@@ -53,4 +56,4 @@ portfolio/
 ##  Nota
 Este repositorio actúa como base del portfolio, mientras que la versión principal está desplegada en dominio propio.
 
-<img src="./assets/portfolio.png" width="180" />
+<img src="./portfolio.png" width="180" />
